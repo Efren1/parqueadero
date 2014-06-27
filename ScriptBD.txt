@@ -1,0 +1,67 @@
+create database bdparq
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+CREATE SCHEMA IF NOT EXISTS `bdparq` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `bdparq` ;
+
+-- -----------------------------------------------------
+-- Table `bdparq`.`Cliente`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `bdparq`.`Cliente` (
+  `Id_Cliente` INT NOT NULL ,
+  `Nombre_Cliente` VARCHAR(45) NULL ,
+  `Apellido_Cliente` VARCHAR(45) NULL ,
+  `Telefono_Cliente` INT NULL ,
+  `Direccion_Cliente` VARCHAR(45) NULL ,
+  PRIMARY KEY (`Id_Cliente`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bdparq`.`Ticket`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `bdparq`.`Ticket` (
+  `Id_Ticket` INT NOT NULL ,
+  `Id_Cliente` INT NULL AUTO_INCREMENT ,
+  `FechaIngreso_T` DATETIME NULL ,
+  `FechaSalida_T` DATETIME NULL ,
+  `Costo_T` DOUBLE NULL ,
+  `Pagado_T` TINYINT(1) NULL ,
+  PRIMARY KEY (`Id_Ticket`) ,
+  INDEX `Id_Cliente_idx` (`Id_Cliente` ASC) ,
+  CONSTRAINT `Id_Cliente`
+    FOREIGN KEY (`Id_Cliente` )
+    REFERENCES `bdparq`.`Cliente` (`Id_Cliente` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bdparq`.`Abonado`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `bdparq`.`Abonado` (
+  `Id_Abonado` INT NOT NULL ,
+  `Id_Cliente` INT NOT NULL ,
+  `Estado` TINYINT(1) NULL ,
+  `FechaIngreso_A` DATETIME NULL ,
+  `FechaSalida_A` DATETIME NULL ,
+  `Costo` DOUBLE NULL ,
+  PRIMARY KEY (`Id_Abonado`, `Id_Cliente`) ,
+  INDEX `id_cliente_idx` (`Id_Cliente` ASC) ,
+  CONSTRAINT `id_cliente`
+    FOREIGN KEY (`Id_Cliente` )
+    REFERENCES `bdparq`.`Cliente` (`Id_Cliente` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+USE `bdparq` ;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
