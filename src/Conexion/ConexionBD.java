@@ -26,12 +26,12 @@ public class ConexionBD {
         }
         catch(ClassNotFoundException ex)
         {
-            JOptionPane.showMessageDialog(null, ex, "Error1 en la Conexión con la BD "+ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex, "Error1: La clase no se encontro en la Conexión con la BD "+ex.getMessage(), JOptionPane.ERROR_MESSAGE);
             conexion=null;
         }
         catch(SQLException ex)
         {
-            JOptionPane.showMessageDialog(null, ex, "Error2 en la Conexión con la BD "+ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex, "Error2:  en la Conexión con la BD "+ex.getMessage(), JOptionPane.ERROR_MESSAGE);
             conexion=null;
         }
         catch(Exception ex)
