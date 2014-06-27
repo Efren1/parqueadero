@@ -164,6 +164,7 @@ ResultSet resultado;
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
     try {
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog("La version 2.0 esta por finalizar estamos realizando actividades graficas",this);
         int auxb;
         String consulta = "Select Pagado_T,Id_Ticket,FechaIngreso_T,FechaSalida_T,Costo_T from ticket where Id_Ticket= "+this.txtCodigoT.getText();
         str=objBD.prepareStatement(consulta);
