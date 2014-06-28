@@ -137,6 +137,15 @@ int valorEntero;
                 valorEntero = (int) Math.floor(Math.random()*(1-99999+1)+99999);
                 
             }
+        }else{
+            this.lblCodTicket.setText(""+valorEntero);
+            Calendar Cal= Calendar.getInstance(); 
+            fec= Cal.get(Cal.YEAR)+"-"+(Cal.get(Cal.MONTH)+1)+"-"+Cal.get(Cal.DATE)+" "+Cal.get(Cal.HOUR_OF_DAY)+":"+Cal.get(Cal.MINUTE)+":"+Cal.get(Cal.SECOND); 
+            JOptionPane.showMessageDialog(this,"La fecha del ticket es "+ fec);
+            String insercion = "Insert into Ticket  (id_ticket, fechaingreso_t,pagado_T) values ("+valorEntero+",'"+fec+"',0);";
+            str.executeUpdate(insercion);
+            JOptionPane.showMessageDialog(this,"Ticket Registrado con Exito \n No olvide guardar su No de Ticket");
+            this.btnPDF.setEnabled(true);
         }
     } catch (SQLException ex) {
         Logger.getLogger(JITicket.class.getName()).log(Level.SEVERE, null, ex);
